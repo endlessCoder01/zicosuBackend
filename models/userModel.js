@@ -1,13 +1,13 @@
 const db = require('../config/db');
 
-const createUser = async ({ name, email, password_hash, phone_number, home_address, role, profile_picture }) => {
+const createUser = async ({name, surname, gender, dob, phone, campus, residential_location, email, reg_number, password_harsh}) => {
   const [result] = await db.query(
-    'INSERT INTO users (name, email, password_hash, phone_number, home_address, role, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?)',
-    [name, email, password_hash, phone_number, home_address, role, profile_picture]
+    'INSERT INTO users (`name`, `surname`, `gender`, `dob`, `phone`, `campus`, `residential_location`, `email`, `reg_number`, `password_harsh`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    [name, surname, gender, dob, phone, campus, residential_location, email, reg_number, password_harsh
+]
   );
   return { id: result.insertId, name, email };
 };
-
 
 const updateUser = async (userId, updates) => {
   const fields = [];
@@ -49,7 +49,7 @@ const updateUser = async (userId, updates) => {
   values.push(userId);
 
   const [result] = await db.query(
-    `UPDATE users SET ${fields.join(", ")} WHERE user_id = ?`,
+    `UPDATE users SET ${fields.join(", ")} WHERE reg_number = ?`,
     values
   );
 
@@ -62,7 +62,7 @@ const getUserByEmail = async (email) => {
 };
 
 const getUserById = async (id) => {
-  const [rows] = await db.query('SELECT * FROM users WHERE user_id = ?', [id]);
+  const [rows] = await db.query('SELECT * FROM users WHERE reg_number = ?', [id]);
   return rows[0];
 };
 
@@ -77,7 +77,7 @@ const getAllUsers = async () => {
 };
 
 const saveRefreshToken = async (userId, token) => {
-  const [rows] = await db.query('UPDATE users SET refresh_token = ? WHERE user_id = ?', [token, userId]);
+  const [rows] = await db.query('UPDATE users SET refresh_token = ? WHERE reg_number = ?', [token, userId]);
 };
 
 
