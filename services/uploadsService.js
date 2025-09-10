@@ -4,6 +4,10 @@ const getUploads = async () => {
   return await uploadsModel.getAllUploads();
 };
 
+const getUploadByReg = async (id) => {
+  return await uploadsModel.getDocByReg(id);
+};
+
 const getCount = async (id) => {
   const count = await uploadsModel.getDocCountById(id);
   if (!count) throw new Error('Documents not found');
@@ -17,5 +21,6 @@ const createUpload = async (data) => {
 module.exports = {
   createUpload,
   getUploads,
-  getCount
+  getCount,
+  getUploadByReg
 };
