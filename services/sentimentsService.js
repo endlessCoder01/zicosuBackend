@@ -1,34 +1,35 @@
-const userModel = require('../models/userModel');
+const sentimentsModel = require('../models/sentimentsModel');
 
-const getUsers = async () => {
-  return await userModel.getAllUsers();
+const getSentiments = async () => {
+  return await sentimentsModel.getAllSentiments();
 };
 
-const getUser = async (id) => {
-  const user = await userModel.getUserById(id);
+const getSentiment = async (id) => {
+  const user = await sentimentsModel.getSentimentById(id);
   if (!user) throw new Error('User not found');
   return user;
 };
 
-const getUserByStatus = async (status) => {
-  const users = await userModel.getUserByStatus(status);
-  if (!users) throw new Error('Users not found');
-  return users;
+const getSentimentByReg = async (id) => {
+  const user = await sentimentsModel.getSentimentByReg(id);
+  if (!user) throw new Error('User not found');
+  return user;
 };
 
-const createUser = async (userData) => {
-  return await userModel.createUser(userData);
+
+const createSentiment = async (data) => {
+  return await sentimentsModel.createSentiment(data);
 };
-const updateUser = async (id, userData) => {
-  console.log("look",id);
-  console.log(userData)
-  return await userModel.updateUser(id, userData);
-};
+
+// const updateUser = async (id, userData) => {
+//   console.log("look",id);
+//   console.log(userData)
+//   return await sentimentsModel.updateUser(id, userData);
+// };
 
 module.exports = {
-  getUsers,
-  getUser,
-  createUser,
-  updateUser,
-  getUserByStatus,
+getSentiment,
+getSentimentByReg,
+getSentiments,
+createSentiment,
 };
