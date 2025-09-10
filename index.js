@@ -25,11 +25,17 @@ app.post('/test', (req, res) => {
     res.json({ received: req.body });
 });
 
-// const authRoutes = require('./routes/authRoutes');
-// const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const nokRoutes = require('./routes/nextOfKinRoutes');
+const uploadsRoutes = require('./routes/uploadsRoutes');
+const sentimentsRoutes = require('./routes/sentimentsRoutes');
 
-// app.use('/auth', authRoutes);
-// app.use('/users', userRoutes);
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
+app.use('/next_of_kins', nokRoutes);
+app.use('/sentiments', sentimentsRoutes);
+app.use('/upload', uploadsRoutes)
 
 
 // Set up storage for multer
