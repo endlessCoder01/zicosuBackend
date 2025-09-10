@@ -1,10 +1,9 @@
 const db = require('../config/db');
 
-const createUser = async ({name, surname, gender, dob, phone, campus, residential_location, email, reg_number, password_harsh}) => {
+const createUser = async ({name, surname, gender, dob, phone, campus, residential_location, email, reg_number, password_hash}) => {
   const [result] = await db.query(
-    'INSERT INTO users (`name`, `surname`, `gender`, `dob`, `phone`, `campus`, `residential_location`, `email`, `reg_number`, `password_harsh`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-    [name, surname, gender, dob, phone, campus, residential_location, email, reg_number, password_harsh
-]
+    'INSERT INTO users (`name`, `surname`, `gender`, `dob`, `phone`, `campus`, `residential_location`, `email`, `reg_number`, `password_hash`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    [name, surname, gender, dob, phone, campus, residential_location, email, reg_number, password_hash]
   );
   return { id: result.insertId, name, email };
 };
@@ -61,6 +60,7 @@ const getUserByEmail = async (email) => {
   return rows[0];
 };
 
+
 const getUserById = async (id) => {
   const [rows] = await db.query('SELECT * FROM users WHERE reg_number = ?', [id]);
   return rows[0];
@@ -86,6 +86,7 @@ module.exports = {
   getAllUsers,
   getUserByEmail,
   getUserById,
+
   saveRefreshToken,
   updateUser,
   getUserByStatus,

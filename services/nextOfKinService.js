@@ -20,6 +20,8 @@ const createUser = async (userData) => {
   return await userModel.createUser(userData);
 };
 const updateUser = async (id, userData) => {
+  console.log("look",id);
+  console.log(userData)
   return await userModel.updateUser(id, userData);
 };
 
