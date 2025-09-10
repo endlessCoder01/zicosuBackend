@@ -1,34 +1,36 @@
-const userModel = require('../models/userModel');
+const nextOfKinModel = require('../models/nextOfKinModel');
 
-const getUsers = async () => {
-  return await userModel.getAllUsers();
+const getNoks = async () => {
+  return await nextOfKinModel.getAllNoks();
 };
 
-const getUser = async (id) => {
-  const user = await userModel.getUserById(id);
+
+const getNok = async (id) => {
+  const user = await nextOfKinModel.getNokById(id);
   if (!user) throw new Error('User not found');
   return user;
 };
 
-const getUserByStatus = async (status) => {
-  const users = await userModel.getUserByStatus(status);
-  if (!users) throw new Error('Users not found');
-  return users;
+const getNokByReg = async (id) => {
+  const user = await nextOfKinModel.getNokByReg(id);
+  if (!user) throw new Error('User not found');
+  return user;
 };
 
-const createUser = async (userData) => {
-  return await userModel.createUser(userData);
+
+const createNok = async (nokData) => {
+  return await nextOfKinModel.createNok(nokData);
 };
-const updateUser = async (id, userData) => {
-  console.log("look",id);
-  console.log(userData)
-  return await userModel.updateUser(id, userData);
-};
+
+// const updateUser = async (id, userData) => {
+//   console.log("look",id);
+//   console.log(userData)
+//   return await nextOfKinModel.updateUser(id, userData);
+// };
 
 module.exports = {
-  getUsers,
-  getUser,
-  createUser,
-  updateUser,
-  getUserByStatus,
+getNok,
+getNokByReg,
+getNoks,
+createNok,
 };
