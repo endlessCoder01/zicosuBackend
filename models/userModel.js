@@ -1,9 +1,9 @@
 const db = require('../config/db');
 
-const createUser = async ({name, surname, gender, dob, phone, campus, residential_location, email, reg_number, password_hash}) => {
+const createUser = async ({name, surname, username, gender, dob, phone, campus, residential_location, email, reg_number, password_hash}) => {
   const [result] = await db.query(
-    'INSERT INTO users (`name`, `surname`, `gender`, `dob`, `phone`, `campus`, `residential_location`, `email`, `reg_number`, `password_hash`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-    [name, surname, gender, dob, phone, campus, residential_location, email, reg_number, password_hash]
+    'INSERT INTO users (`name`, `surname`, `username`,`gender`, `dob`, `phone`, `campus`, `residential_location`, `email`, `reg_number`, `password_hash`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    [name, surname, username, gender, dob, phone, campus, residential_location, email, reg_number, password_hash]
   );
   return { id: result.insertId, name, email };
 };

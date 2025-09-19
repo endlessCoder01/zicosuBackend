@@ -1,1 +1,20 @@
-GET  http://localhost:3000/next_of_kins
+GET  http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImIyMjA5NDZiQHN0dWRlbnRzLmJ1c2UuYWMuenciLCJpYXQiOjE3NTc1MDU2MDIsImV4cCI6MTc1NzUwOTIwMn0.H9m_mymBdAwfwdYG7kGIngH3-vd6VDuA5N_-_FT5iXs
+
+###
+
+POST http://localhost:3000/localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "John",
+    "surname": "Doe",
+    "gender": "male",
+    "dob": "2002-07-11",
+    "phone": "0777494960",
+    "campus": "fse",
+    "residential_location": "new complex",
+    "email": "b220946b@students.buse.ac.zw",
+    "reg_number": "b222946b",
+    "password": "1234"
+}

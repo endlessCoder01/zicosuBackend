@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 require("dotenv").config();
 
-const registerUser = async ({name, surname, gender, dob, phone, campus, residential_location, email, reg_number, password}) => {
+const registerUser = async ({name, surname, username, gender, dob, phone, campus, residential_location, email, reg_number, password}) => {
   const existing = await userModel.getUserByEmail(email);
   if (existing) throw new Error("Email already in use");
 
@@ -11,7 +11,7 @@ const registerUser = async ({name, surname, gender, dob, phone, campus, resident
   if (existingReg) throw new Error("Reg Number already in use");
 
   const password_hash = await bcrypt.hash(password, 10);
-  return await userModel.createUser({ name, surname, gender, dob, phone, campus, residential_location, email, reg_number, password_hash });
+  return await userModel.createUser({ name, surname, username, gender, dob, phone, campus, residential_location, email, reg_number, password_hash });
 };
 
 const loginUser = async ({ email, password }) => {
