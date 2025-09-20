@@ -24,9 +24,15 @@ const updateUser = async (userId, updates) => {
     fields.push("phone_number = ?");
     values.push(updates.phone_number);
   }
-  if (updates.home_address) {
-    fields.push("home_address = ?");
-    values.push(updates.home_address);
+
+  if (updates.residential_location) {
+    fields.push("residential_location = ?");
+    values.push(updates.residential_location);
+  }
+
+  if (updates.last_logged_at) {
+    fields.push("last_logged_at = now()");
+    // values.push(updates.last_logged_at);
   }
 
   if (updates.profile_picture) {
@@ -86,7 +92,6 @@ module.exports = {
   getAllUsers,
   getUserByEmail,
   getUserById,
-
   saveRefreshToken,
   updateUser,
   getUserByStatus,

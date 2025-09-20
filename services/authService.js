@@ -22,10 +22,11 @@ const loginUser = async ({ email, password }) => {
   const isMatch = await bcrypt.compare(password, user.password_hash);
   if (!isMatch) throw new Error("Invalid credentials");
 
-  const userDetails = { userId: user.user_id, email: user.email, role: user.role };
+  await userModel.updateUser(user.reg_number, {"last_logged_at": new Date() })
+  const userDetails = {user};
   const token = generateAccessToken(userDetails);
   const refreshToken = generateRefreshToken(userDetails)
-  await userModel.saveRefreshToken(user.user_id, refreshToken);
+  await userModel.saveRefreshToken(user.reg_number, refreshToken);
 
   return {token, refreshToken, userDetails};
 };

@@ -41,7 +41,7 @@ const updateUser = async (req, res) => {
   const userId = req.params.id
   try {
     const updateUser = await userService.updateUser(userId, req.body);
-    res.status(201).json(updateUser);
+    res.status(200).json(updateUser);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
