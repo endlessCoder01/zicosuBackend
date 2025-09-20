@@ -5,65 +5,56 @@ const createNok = async ({ reg_number, fullname, phone, address, email}) => {
     'INSERT INTO next_of_kins (`reg_number`, `fullname`, `phone`, `address`, `email`) VALUES (?, ?, ?, ?, ?)',
     [reg_number, fullname, phone, address, email]
   );
-  return { id: result.insertId, name, email };
+  return { id: result.insertId };
 };
 
-// const updateUser = async (userId, updates) => {
-//   const fields = [];
-//   const values = [];
+const updateNok = async (userId, updates) => {
+  const fields = [];
+  const values = [];
 
-//   if (updates.email) {
-//     fields.push("email = ?");
-//     values.push(updates.email);
-//   }
-//   if (updates.password_hash) {
-//     fields.push("password_hash = ?");
-//     values.push(updates.password_hash);
-//   }
-//   if (updates.phone_number) {
-//     fields.push("phone_number = ?");
-//     values.push(updates.phone_number);
-//   }
-//   if (updates.home_address) {
-//     fields.push("home_address = ?");
-//     values.push(updates.home_address);
-//   }
+  if (updates.email) {
+    fields.push("email = ?");
+    values.push(updates.email);
+  }
 
-//   if (updates.profile_picture) {
-//     fields.push("profile_picture = ?");
-//     values.push(updates.profile_picture);
-//   }
+  if (updates.fullname) {
+    fields.push("fullname = ?");
+    values.push(updates.fullname);
+  }
 
-//   if (updates.status) {
-//     fields.push("status = ?");
-//     values.push(updates.status);
-//   }
+  if (updates.address) {
+    fields.push("address = ?");
+    values.push(updates.address);
+  }
 
-
+  if (updates.phone) {
+    fields.push("phone = ?");
+    values.push(updates.phone);
+  }
   
-//   if (fields.length === 0) {
-//     return null;
-//   }
+  if (fields.length === 0) {
+    return null;
+  }
 
-//   values.push(userId);
+  values.push(userId);
 
-//   const [result] = await db.query(
-//     `UPDATE users SET ${fields.join(", ")} WHERE reg_number = ?`,
-//     values
-//   );
+  const [result] = await db.query(
+    `UPDATE next_of_kins SET ${fields.join(", ")} WHERE reg_number = ?`,
+    values
+  );
 
-//   return result.affectedRows > 0;
-// };
+  return result.affectedRows > 0;
+};
 
 
 const getNokByReg = async (id) => {
   const [rows] = await db.query('SELECT * FROM next_of_kins WHERE reg_number = ?', [id]);
-  return rows[0];
+  return rows;
 };
 
 const getNokById = async (id) => {
   const [rows] = await db.query('SELECT * FROM next_of_kins WHERE  nok_id = ?', [id]);
-  return rows;
+  return rows[0];
 };
 
 const getAllNoks = async () => {
@@ -77,5 +68,5 @@ module.exports = {
   getAllNoks,
   getNokByReg,
   getNokById,
-  // updateUser,
+  updateNok
 };
