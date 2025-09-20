@@ -5,7 +5,9 @@ const authenticateToken = require('../middlewares/authMiddleware');
 
 router.get('/', authenticateToken, sentimentsController.getAllSentiments);
 router.get('/:id', authenticateToken, sentimentsController.getSentimentById);
-// router.patch('/userUpdate/:id', authenticateToken, sentimentsController.);
-// router.get('/status/:status', authenticateToken, sentimentsController.getUserByStatus);
+router.get('/all/by_user', authenticateToken, sentimentsController.getSentimentByReg);
+router.post('/', authenticateToken, sentimentsController.createSentiment);
+router.patch('/:sentId', authenticateToken, sentimentsController.updateSentiment);
+
 
 module.exports = router;

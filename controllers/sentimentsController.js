@@ -12,18 +12,19 @@ const getAllSentiments= async (req, res) => {
 const getSentimentById = async (req, res) => {
   console.log("id", req.params.id)
   try {
-    const user = await sentimentsService.getSentiment(req.params.id);
-    res.json(user);
+    const sentiments = await sentimentsService.getSentiment(req.params.id);
+    res.json(sentiments);
   } catch (err) {
     res.status(404).json({ error: err.message });
   }
 };
 
 const getSentimentByReg = async (req, res) => {
-  console.log("id", req.params.id)
+ 
   try {
-    const user = await sentimentsService.getSentimentByReg(req.params.id);
-    res.json(user);
+
+    const sentiments = await sentimentsService.getSentimentByReg(req.user.user.reg_number);
+    res.json(sentiments);
   } catch (err) {
     res.status(404).json({ error: err.message });
   }
@@ -32,26 +33,38 @@ const getSentimentByReg = async (req, res) => {
 
 const createSentiment = async (req, res) => {
   try {
-    const newSentiment = await sentimentsService.createSentiment(req.body);
-    res.status(201).json(newSentiment);
+    const user = req.user;
+    console.log("sentiment", user);
+    const newSent = {
+      reg_number: user.user.reg_number,
+      sentiment: req.body.sentiment,
+      upload_url: req.body.upload_url
+    }
+    
+    console.log("newSent", newSent);
+
+    const newSentiment = await sentimentsService.createSentiment(newSent);
+    res.status(200).json(newSentiment);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-// const updateUser = async (req, res) => {
-//   const userId = req.params.id
-//   try {
-//     const updateUser = await sentimentsService.updateUser(userId, req.body);
-//     res.status(201).json(updateUser);
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
+const updateSentiment = async (req, res) => {
+
+  try {
+    console.log("updating", req.params.sentId)
+    const updateSent = await sentimentsService.updateSentiment(req.params.sentId, req.body);
+    res.status(200).json(updateSent);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 module.exports = {
 createSentiment,
 getAllSentiments,
 getSentimentById,
-getSentimentByReg
+getSentimentByReg,
+updateSentiment
 };
