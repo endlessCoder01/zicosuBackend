@@ -14,10 +14,10 @@ const createEmail = async ({
   };
 };
 
-// const getUserByEmail = async (email) => {
-//   const [rows] = await db.query("SELECT * FROM users WHERE email = ?", [email]);
-//   return rows[0];
-// };
+const getEmailByEmail = async (email) => {
+  const [rows] = await db.query("SELECT * FROM emails WHERE email = ?", [email]);
+  return rows[0];
+};
 
 
 const getAllEmails = async () => {
@@ -34,4 +34,5 @@ module.exports = {
  createEmail,
  getAllEmails,
  deleteEmailById,
+ getEmailByEmail,
 };

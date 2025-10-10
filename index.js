@@ -30,8 +30,10 @@ const userRoutes = require('./routes/userRoutes');
 const nokRoutes = require('./routes/nextOfKinRoutes');
 const uploadsRoutes = require('./routes/uploadsRoutes');
 const sentimentsRoutes = require('./routes/sentimentsRoutes');
+const emailRoutes = require('./routes/emailRoutes')
 
 app.use('/auth', authRoutes);
+app.use('/email', emailRoutes);
 app.use('/users', userRoutes);
 app.use('/next_of_kins', nokRoutes);
 app.use('/sentiments', sentimentsRoutes);

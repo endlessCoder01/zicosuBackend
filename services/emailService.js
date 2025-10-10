@@ -9,6 +9,10 @@ const deleteEmailById = async (id) => {
 };
 
 const createEmail = async (data) => {
+  
+    const existingEmail = await emailModel.getEmailByEmail(data.email);
+    if (existingReg) throw new Error("Email already in submitted");
+
   return await emailModel.createEmail(data);
 };
 
