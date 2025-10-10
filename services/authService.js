@@ -8,7 +8,7 @@ const registerUser = async ({name, surname, username, gender, dob, phone, campus
   if (existing) throw new Error("Email already in use");
 
   const existingReg = await userModel.getUserById(reg_number);
-  if (existingReg) throw new Error("Reg Number already in use");
+  if (existingReg) throw new Error("Student Number already in use");
 
   const password_hash = await bcrypt.hash(password, 10);
   return await userModel.createUser({ name, surname, username, gender, dob, phone, campus, residential_location, email, reg_number, password_hash });
