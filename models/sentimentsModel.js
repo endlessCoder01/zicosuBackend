@@ -60,10 +60,37 @@ const getAllSentiments = async () => {
   return rows;
 };
 
+const getAllSentimentsWithUsers = async () => {
+  const [rows] = await db.query(`
+    SELECT 
+      s.id AS sentiment_id,
+      s.reg_number,
+      s.sentiment,
+      s.upload_url,
+      s.created_at,
+      u.id AS user_id,
+      u.name,
+      u.surname,
+      u.username,
+      u.gender,
+      u.dob,
+      u.phone,
+      u.campus,
+      u.residential_location,
+      u.email
+    FROM sentiments s
+    JOIN users u ON s.reg_number = u.reg_number
+    ORDER BY s.id ASC
+  `);
+  return rows;
+};
+
+
 module.exports = {
   createSentiment,
   getAllSentiments,
   getSentimentById,
   getSentimentByReg,
   updateSentiment,
+  getAllSentimentsWithUsers,
 };
