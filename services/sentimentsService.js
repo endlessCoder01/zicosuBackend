@@ -4,6 +4,10 @@ const getSentiments = async () => {
   return await sentimentsModel.getAllSentiments();
 };
 
+const getAllSentimentsWithUsers = async () => {
+  return await sentimentsModel.getAllSentimentsWithUsers();
+};
+
 const getSentiment = async (id) => {
   const user = await sentimentsModel.getSentimentById(id);
   if (!user) throw new Error("User not found");
@@ -31,6 +35,7 @@ module.exports = {
   getSentiment,
   getSentimentByReg,
   getSentiments,
+  getAllSentimentsWithUsers,
   createSentiment,
   updateSentiment,
 };

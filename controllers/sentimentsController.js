@@ -9,6 +9,15 @@ const getAllSentiments= async (req, res) => {
   }
 };
 
+const getAllSentimentsWithUsers= async (req, res) => {
+  try {
+    const sentiments = await sentimentsService.getAllSentimentsWithUsers();
+    res.json(sentiments);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 const getSentimentById = async (req, res) => {
   console.log("id", req.params.id)
   try {
@@ -66,5 +75,6 @@ createSentiment,
 getAllSentiments,
 getSentimentById,
 getSentimentByReg,
-updateSentiment
+updateSentiment,
+getAllSentimentsWithUsers,
 };
