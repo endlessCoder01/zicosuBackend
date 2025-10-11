@@ -66,7 +66,7 @@ const getAllSentimentsWithUsers = async () => {
       s.id AS sentiment_id,
       s.reg_number,
       s.sentiment,
-      s.upload_url,
+      s.upload_url AS sentiment_upload_url,
       s.created_at,
       u.id AS user_id,
       u.name,
@@ -77,9 +77,13 @@ const getAllSentimentsWithUsers = async () => {
       u.phone,
       u.campus,
       u.residential_location,
-      u.email
+      u.email,
+      up.file_url AS profile_url
     FROM sentiments s
     JOIN users u ON s.reg_number = u.reg_number
+    LEFT JOIN uploads up 
+      ON u.reg_number = up.reg_number 
+      AND up.title = 'profile'
     ORDER BY s.id ASC
   `);
   return rows;
