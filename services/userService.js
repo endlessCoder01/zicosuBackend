@@ -17,6 +17,7 @@ const getUserByStatus = async (status) => {
 };
 
 const createUser = async (userData) => {
+    console.log("nwhjgbjhbjke", userData)
   return await userModel.createUser(userData);
 };
 const updateUser = async (id, userData) => {
