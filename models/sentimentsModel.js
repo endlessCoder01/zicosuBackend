@@ -63,12 +63,12 @@ const getAllSentiments = async () => {
 const getAllSentimentsWithUsers = async () => {
   const [rows] = await db.query(`
     SELECT 
-      s.id AS sentiment_id,
+      s.sentiment_id,
       s.reg_number,
       s.sentiment,
       s.upload_url AS sentiment_upload_url,
-      s.created_at,
-      u.id AS user_id,
+      s.date_created,
+      u.reg_number,
       u.name,
       u.surname,
       u.username,
@@ -84,10 +84,11 @@ const getAllSentimentsWithUsers = async () => {
     LEFT JOIN uploads up 
       ON u.reg_number = up.reg_number 
       AND up.title = 'profile'
-    ORDER BY s.id ASC
+    ORDER BY s.sentiment_id DESC
   `);
   return rows;
 };
+
 
 
 module.exports = {
