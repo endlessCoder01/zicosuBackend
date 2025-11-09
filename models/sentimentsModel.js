@@ -61,34 +61,41 @@ const getAllSentiments = async () => {
 };
 
 const getAllSentimentsWithUsers = async () => {
-  const [rows] = await db.query(`
-    SELECT 
-      s.sentiment_id,
-      s.reg_number,
-      s.sentiment,
-      s.upload_url AS sentiment_upload_url,
-      s.date_created,
-      u.reg_number,
-      u.name,
-      u.surname,
-      u.username,
-      u.gender,
-      u.dob,
-      u.phone,
-      u.campus,
-      u.residential_location,
-      u.email,
-      up.file_url AS profile_url
-    FROM sentiments s
-    JOIN users u ON s.reg_number = u.reg_number
-    LEFT JOIN uploads up 
-      ON u.reg_number = up.reg_number 
-      AND up.title = 'profile'
-    ORDER BY s.sentiment_id DESC
-  `);
-  return rows;
-};
+const [rows] = await db.query(`
+  SELECT 
+    s.sentiment_id,
+    s.reg_number,
+    s.sentiment,
+    s.upload_url AS sentiment_upload_url,
+    s.date_created,
+    u.name,
+    u.surname,
+    u.username,
+    u.gender,
+    u.dob,
+    u.phone,
+    u.campus,
+    u.residential_location,
+    u.email,
+    up.file_url AS profile_url
+  FROM sentiments s
+  JOIN users u 
+    ON s.reg_number = u.reg_number
+  LEFT JOIN (
+    SELECT reg_number, file_url
+    FROM uploads
+    WHERE title = 'profile'
+    GROUP BY reg_number
+    ORDER BY MAX(upload_id) DESC
+  ) up
+    ON u.reg_number = up.reg_number
+  ORDER BY s.sentiment_id DESC
+`);
 
+  console.log("honaiii", rows)
+  return rows;
+
+};
 
 
 module.exports = {

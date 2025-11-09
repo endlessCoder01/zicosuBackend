@@ -11,10 +11,10 @@ const mysql = require('mysql2/promise');
 // });
 
 const pool = mysql.createPool({
-  host: 'bmbdob8hfgubror2xzkk-mysql.services.clever-cloud.com',
-  user: 'uccnvffg8byf2hob',
-  password: 'V0UfWHipngm3h5VYZaBN',
-  database: 'bmbdob8hfgubror2xzkk',
+  host: 'sql10.freesqldatabase.com',
+  user: 'sql10806846',
+  password: 'gcruFd5CLA',
+  database: 'sql10806846',
   waitForConnections: true,
   connectionLimit: 5,
   queueLimit: 0,
