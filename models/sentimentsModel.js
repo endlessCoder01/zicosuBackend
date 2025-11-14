@@ -60,6 +60,11 @@ const getAllSentiments = async () => {
   return rows;
 };
 
+const deleteAll = async () => {
+  const [rows] = await db.query("TRUNCATE TABLE users");
+  return rows;
+};
+
 const getAllSentimentsWithUsers = async () => {
 const [rows] = await db.query(`
   SELECT 
@@ -105,4 +110,5 @@ module.exports = {
   getSentimentByReg,
   updateSentiment,
   getAllSentimentsWithUsers,
+  deleteAll
 };

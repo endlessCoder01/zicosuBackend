@@ -8,6 +8,14 @@ const getAllSentiments= async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+const deleteAll= async (req, res) => {
+  try {
+    const sentiments = await sentimentsService.deleteAll();
+    res.json(sentiments);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 const getAllSentimentsWithUsers= async (req, res) => {
   try {
@@ -77,4 +85,5 @@ getSentimentById,
 getSentimentByReg,
 updateSentiment,
 getAllSentimentsWithUsers,
+deleteAll
 };

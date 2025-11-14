@@ -8,6 +8,10 @@ const getAllSentimentsWithUsers = async () => {
   return await sentimentsModel.getAllSentimentsWithUsers();
 };
 
+const deleteAll = async () => {
+  return await sentimentsModel.deleteAll();
+};
+
 const getSentiment = async (id) => {
   const user = await sentimentsModel.getSentimentById(id);
   if (!user) throw new Error("User not found");
@@ -38,4 +42,5 @@ module.exports = {
   getAllSentimentsWithUsers,
   createSentiment,
   updateSentiment,
+  deleteAll
 };
